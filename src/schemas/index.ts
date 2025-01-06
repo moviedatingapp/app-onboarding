@@ -5,10 +5,16 @@ const signUpSchema = z.object({
   email: z
     .string()
     .nonempty("This is a required field")
-    .email({ message: "Invalid email address" }),
+    .email({ message: "Invalid email" }),
   userName: z.string().nonempty("This is a required field"),
-  password: z.string().nonempty("This is a required field").min(8),
-  confirmPassword: z.string().nonempty("This is a required field").min(8),
+  password: z
+    .string()
+    .nonempty("This is a required field")
+    .min(8, "Password should be at least 8 characters long"),
+  confirmPassword: z
+    .string()
+    .nonempty("This is a required field")
+    .min(8, "Password should be at least 8 characters long"),
 });
 
 export const schemas = { signUpSchema };

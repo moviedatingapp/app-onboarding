@@ -30,9 +30,11 @@ export default function TextField({
           {...formMethods.register(inputName)}
           className=" border w-96 rounded-5 border-light-grey-border placeholder:text-light-grey outline-none px-1 py-2 placeholder:capitalize"
         />
-        <p className="text-red-bright">
-          *{formMethods?.formState?.errors[inputName]?.message as string}
-        </p>
+        {formMethods?.formState?.errors[inputName]?.message && (
+          <p className="text-red-bright">
+            *{formMethods?.formState?.errors[inputName]?.message as string}
+          </p>
+        )}
       </div>
     </fieldset>
   );
