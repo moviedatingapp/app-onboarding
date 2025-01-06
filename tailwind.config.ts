@@ -10,9 +10,14 @@ export default {
     extend: {
       colors: {
         "snow-white": "#FBFBFB",
-        "white-primary": "#fffff",
+        "white-primary": "#FFFFFF",
         "black-primary": "#000000",
         "nero-black": "#131313",
+        "red-bright": "#FF1E1E",
+        "blue-secondary": "#11009E",
+        "blue-primary": "#0766AD",
+        "light-grey": "#B0B1B2",
+        "light-grey-border": "#DCDEDF",
       },
 
       fontSize: {
