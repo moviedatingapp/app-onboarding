@@ -17,4 +17,15 @@ const signUpSchema = z.object({
     .min(8, "Password should be at least 8 characters long"),
 });
 
-export const schemas = { signUpSchema };
+const signInSchema = z.object({
+  email: z
+    .string()
+    .nonempty("This field is mandatory")
+    .email({ message: " email is invalid" }),
+  password: z
+    .string()
+    .nonempty("This is a required field")
+    .min(8, "Password should be at least 8 characters long"),
+});
+
+export const schemas = { signUpSchema, signInSchema };

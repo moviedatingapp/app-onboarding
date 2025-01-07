@@ -22,13 +22,13 @@ export default function TextField({
       <label htmlFor={inputName} className=" text-20 font-normal">
         {inputLabel}
       </label>
-      <div>
+      <div className="w-[386px] p-[1px] bg-light-grey-border rounded-5 flex">
         <input
           placeholder={placeholder}
           type={inputType}
           value={inputValue}
           {...formMethods.register(inputName)}
-          className=" border w-96 rounded-5 border-light-grey-border placeholder:text-light-grey outline-none px-1 py-2 placeholder:capitalize"
+          className="  w-96 rounded-5  placeholder:text-light-grey outline-none px-1 py-2 placeholder:capitalize"
         />
         {formMethods?.formState?.errors[inputName]?.message && (
           <p className="text-red-bright">
