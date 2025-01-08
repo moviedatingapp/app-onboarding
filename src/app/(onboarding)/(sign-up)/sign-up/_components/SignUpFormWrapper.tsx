@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemas } from "@/schemas";
 import axios from "axios";
+// import { passwordConfirmationMatch } from "@/app/(onboarding)/_utils";
 
 export default function SignUpFormWrapper({
   children,
@@ -21,6 +22,16 @@ export default function SignUpFormWrapper({
     resolver: zodResolver(schemas.signUpSchema),
   });
 
+  // const password = formMethods.watch("password");
+  // const confirmPassword = formMethods.watch("confirmPassword");
+
+  // if (passwordConfirmationMatch(password, confirmPassword)) {
+  //   formMethods.setError("confirmPassword", {
+  //     message: "Passwords do not match",
+  //   });
+  // } else {
+  //   formMethods.clearErrors("confirmPassword");
+  // }
   const handleSubmit = formMethods.handleSubmit(async (data) => {
     await axios
       .post("http://localhost:5000/sign-up", {
