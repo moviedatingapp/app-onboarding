@@ -1,10 +1,9 @@
 "use client";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemas } from "@/schemas";
-import axios from "axios";
-// import { passwordConfirmationMatch } from "@/app/(onboarding)/_utils";
+import { signUpWithCredentials } from "@/utils/api";
 
 export default function SignUpFormWrapper({
   children,
@@ -21,29 +20,23 @@ export default function SignUpFormWrapper({
     },
     resolver: zodResolver(schemas.signUpSchema),
   });
+  const { watch, setError, clearErrors } = formMethods;
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
 
-  // const password = formMethods.watch("password");
-  // const confirmPassword = formMethods.watch("confirmPassword");
-
-  // if (passwordConfirmationMatch(password, confirmPassword)) {
-  //   formMethods.setError("confirmPassword", {
-  //     message: "Passwords do not match",
-  //   });
-  // } else {
-  //   formMethods.clearErrors("confirmPassword");
-  // }
-  const handleSubmit = formMethods.handleSubmit(async (data) => {
-    await axios
-      .post("http://localhost:5000/sign-up", {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        userName: data.userName,
-        confirmPassword: data.confirmPassword,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+  useEffect(() => {
+    if (password && confirmPassword) {
+      if (password !== confirmPassword) {
+        setError("confirmPassword", {
+          message: "Passwords do not match",
+        });
+      } else {
+        clearErrors("confirmPassword");
+      }
+    }
+  }, [password, confirmPassword, setError, clearErrors]);
+  const handleSubmit = formMethods.handleSubmit((data) => {
+    signUpWithCredentials(data);
   });
 
   return (
