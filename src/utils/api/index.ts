@@ -1,9 +1,10 @@
 import { SignUpFormSchema } from "@/schemas/types";
 import axios from "axios";
+import envConfigs from "../configs";
 
 const signUpWithCredentials = async (data: SignUpFormSchema) => {
   await axios
-    .post("http://localhost:5000/sign-up", {
+    .post(`${envConfigs.rootUrl}sign-up`, {
       name: data.name,
       email: data.email,
       password: data.password,
